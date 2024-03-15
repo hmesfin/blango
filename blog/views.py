@@ -4,13 +4,17 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from blog.forms import CommentForm
 
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
+
+
 # Create your views here.
+@cache_page(300)
+@vary_on_cookie
 def index(request):
     posts = Post.objects.all()
-    context = {
-        "posts": posts
-    }
-    return render(request, "blog/index.html", context)
+    logger.debug("Loaded %d recent posts for post %d", len(posts), post.pk)
+    return render(request, "blog/index.html", {"posts": posts})
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
