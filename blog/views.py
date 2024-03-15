@@ -13,7 +13,6 @@ from django.views.decorators.vary import vary_on_cookie
 @vary_on_cookie
 def index(request):
     posts = Post.objects.all()
-    logger.debug("Loaded %d recent posts for post %d", len(posts), post.pk)
     return render(request, "blog/index.html", {"posts": posts})
 
 def post_detail(request, slug):
