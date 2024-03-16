@@ -32,6 +32,6 @@ urlpatterns = [
     "accounts/register/",
     RegistrationView.as_view(form_class=BlangoRegistrationForm),
     name="django_registration_register",),
-    path("api/v1/", include("blog.api_urls")),
+    path("api/v1/", include("blog.api.urls")),
 
 ]
